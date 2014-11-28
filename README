@@ -1,0 +1,7 @@
+ThreadPool In C
+
+This is a simple implementation of a threadpool in C in an attempt to understand the POSIX thread library.
+This will have a simple interface that allows the user to load jobs onto the queue and have threads in the pool execute them.
+Currently this supports only one thread-pool per application. In future, we can have a list of thread-pools that allows the above drawback to be lifted.
+
+
