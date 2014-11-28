@@ -2,4 +2,7 @@
 # This will setup those directories in your working directory.
 # There may be some other way, but I donot know at this point.
 
-mkdir -p lib obj 
+for i in 'lib' 'obj'; do
+	echo 'Setting Up' $i
+	mkdir -p $i
+done
