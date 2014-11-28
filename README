@@ -1,7 +1,53 @@
 ThreadPool In C
 
 This is a simple implementation of a threadpool in C in an attempt to understand the POSIX thread library.
+
 This will have a simple interface that allows the user to load jobs onto the queue and have threads in the pool execute them.
+
 Currently this supports only one thread-pool per application. In future, we can have a list of thread-pools that allows the above drawback to be lifted.
 
+Currently, git doesnot hold empty directories in github, so i have a configure script. Run this the first time you clone.
+Making the library is straight forward. You can read the makefile.
 
+The code is well documented, I suggest you to start from the header files, then onto the implementations in src/
+
+-----------------------------------------------------------------------------------------------------------------------
+
+To Use :
+
+1) setup the required folders using the configure script
+        use :
+                ./configure.sh
+
+2) compile the library(static lib now)
+        use :
+                make lib
+
+4) compile your sources.
+        use -I option to include the path for threadpool.h, queue.h, task.h  
+
+        use the libthreadpool.a while linking(-lthreadpool)
+        use -L option to specify the directory where libthreadpool.a is present
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Note On gcc Compiler Options....
+
+-I option :
+		add a header file search path.
+		Eg. if header is /home/us/headers/example.h
+		use "-I/home/us/headers" as option without quotes
+		
+		compiling :
+		use -c option to get the object file. this needs to be linked with libraries to produce an executable.
+		
+		Linking :
+			Adding library search path using -L option
+			Eg. If library is /home/ex/lib/libexample.a
+			
+			use -L/home/ex/lib to add the directory
+			use -lexample at the end to actually use the library
+			Convention used is l(ib)example(.a)
+				The stuff in b/w parenthesis is assumed and hence ignored.
+
+-----------------------------------------------------------------------------------------------------------------------
