@@ -12,7 +12,7 @@ void *f1(void *arg)
 
 void *f2(void *arg)
 {
-	printf("f1(%d)\n", (int)arg);
+	printf("f2(%d)\n", (int)arg);
 	return (void *)12;
 }
 
@@ -47,5 +47,13 @@ int main()
 	printf("%d\n", get_len(q1));
 	printf("%d\n", is_queue_empty(q1));
 	
-	destroy_queue(q1);		
+	empty_queue(q1);		
+	
+	enqueue(q1, mk_task(f2, (void *)2));
+	enqueue(q1, mk_task(f1, (void *)9));
+	
+	printf("%d\n", get_len(q1));
+	printf("%d\n", is_queue_empty(q1));
+
+	destroy_queue(q1);
 }

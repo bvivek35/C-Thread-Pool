@@ -124,5 +124,6 @@ int is_queue_empty(const queue_t *);
 
 void destroy_queue(queue_t *);
 
+void empty_queue(queue_t *);
 
 #endif

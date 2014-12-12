@@ -12,6 +12,14 @@
 #include "task.h"
 #include "queue.h"
 
+enum __shutdown
+{
+	working,
+	graceful_shutdown,
+	immediate_shutdown,
+};
+typedef enum __shutdown shutdown_t;
+
 
 struct __threadpool
 {
@@ -22,17 +30,16 @@ struct __threadpool
 	pthread_cond_t __pool_notify_task;
 	
 	int __n_threads;
-	int __task_pending;
-	int __shutdown;	
+	int __n_task_pending;
+	int __n_started_threads;
+	shutdown_t __shutdown;	
 };
 typedef struct __threadpool threadpool_t;
 
-
-
 threadpool_t *threadpool_create(int);
 
-void threadpool_add_task(task_t *);
+void threadpool_add_task(threadpool_t *, task_t *);
 
-void destroy_threadpool(threadpool_t *);
+void threadpool_destroy(threadpool_t *, shutdown_t);
 
 #endif

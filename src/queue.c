@@ -139,7 +139,12 @@ void destroy_queue(queue_t *queue)
 #if 0	
 	printf("destroy_queue()\n");
 #endif
-	
+	empty_queue(queue);
+	free(queue);
+}
+
+void empty_queue(queue_t *queue)
+{
 	__queue_node_t *head = queue->__head;
 	__queue_node_t *tmp;
 	
@@ -152,7 +157,10 @@ void destroy_queue(queue_t *queue)
 		destroy_task(tmp->__task);
 		destroy_queue_node(tmp);
 	}
-	free(queue);
+	
+	queue->__head = NULL;
+	queue->__tail = NULL;
+	queue->__n = 0;	
 }
 
 /*
@@ -162,3 +170,4 @@ static void destroy_queue_node(__queue_node_t *tmp)
 {
 	free(tmp);
 }
+

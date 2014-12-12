@@ -83,8 +83,10 @@ void *get_arg(const task_t *task)
 
 void destroy_task(task_t *task)
 {
+
+#if 0	
 	printf("destroy_task()\n");
-	
+#endif	
 	free(task);
 }
 
