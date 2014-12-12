@@ -42,8 +42,8 @@ int main()
 	threadpool_add_task(pool, mk_task(f1, NULL));
 	threadpool_add_task(pool, mk_task(f2, NULL));
 	threadpool_add_task(pool, mk_task(f1, NULL));
-	threadpool_add_task(pool, mk_task(f2, NULL));
 	threadpool_destroy(pool, graceful_shutdown);	
+	threadpool_add_task(pool, mk_task(f2, NULL));
 	
 	printf("%d\n", my_count1);
 	printf("%d\n", my_count2);
