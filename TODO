@@ -1,3 +1,4 @@
-1) Refine the include/threadpool.h interface.
-2) Implement the include/threadpool.h interface in src/threadpool.c
-3) Some features later on
+1) Make docs compatible with doxygen
+2) Add error codes in all pthread fns.
+3) Add error codes for threadpool fns.
+4) Some adv features 
