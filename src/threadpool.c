@@ -1,3 +1,10 @@
+/*
+* Implementation of the thread-pool
+* A no. of worker threads process the tasks in a task-queue
+*
+* Implementation of the include/threadpool.h interface
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,15 +15,40 @@
 #include "task.h"
 #include "queue.h"
 
-static void __threadpool_free(threadpool_t *);
-static void *__thread_fn(void *pool);
 
+/*
+* frees all components of the thread-pool
+* 
+* @param threadpool_t* : pool to be freed
+*/
+
+static void threadpool_free(threadpool_t *);
+
+
+/*
+* a function that the worker thread must execute upon creation.
+* POSIX threads must begin execution as they are created.
+* this function, blocks the thread.
+* when a task in the queue is available, one is woken up.
+* finishes execution, then goes back to a blocked state again.
+*  
+* @param void* : a ptr to the threadpool casted to void* for compatibility
+* 
+* return void* : present for only compatibility reasons. returns NULL
+*/
+
+static void *thread_fn(void *pool);
+
+
+/*
+* creates a new pool and returns a ptr to the just created thread-pool
+*/
 
 threadpool_t *threadpool_create(int n)
 {
 	threadpool_t *pool = malloc(sizeof *pool);
 	
-	pool->__threads = malloc(n * sizeof *(pool->__threads));
+	pool->__threads = malloc(n * sizeof(*(pool->__threads)));
 	pool->__task_queue = mk_queue();
 	
 	pthread_mutex_init(&(pool->__pool_lock), NULL);
@@ -31,12 +63,17 @@ threadpool_t *threadpool_create(int n)
 	for (i = 0; i < n; ++i)
 	{
 		pthread_create(&(pool->__threads[i]), NULL, 
-						__thread_fn,(void *)pool);
+						thread_fn,(void *)pool);
 	} 
 
 	return pool;	
 }
 
+
+/*
+* adds a new task to the fifo task-queue of the pool
+* ensures that addition takes place iff pool is NOT shutting down
+*/
 
 void threadpool_add_task(threadpool_t *pool, task_t *task)
 {
@@ -53,6 +90,13 @@ void threadpool_add_task(threadpool_t *pool, task_t *task)
 	pthread_mutex_unlock(&(pool->__pool_lock));
 }
 
+
+/*
+* initalizes shutting down of the thread-pool
+* broadcasts all threads to wake up
+* joins all threads also and frees the pool
+* after destroy has been called, all calls to add task are unacknowledged
+*/
 
 void threadpool_destroy(threadpool_t *pool, shutdown_t status)
 {
@@ -78,10 +122,15 @@ void threadpool_destroy(threadpool_t *pool, shutdown_t status)
 		}
 	}
 	
-	__threadpool_free(pool);
+	threadpool_free(pool);
 }
 
-static void __threadpool_free(threadpool_t *pool)
+
+/*
+* frees the components of the pool
+*/
+
+static void threadpool_free(threadpool_t *pool)
 {
 	free(pool->__threads);
 	destroy_queue(pool->__task_queue);
@@ -93,7 +142,15 @@ static void __threadpool_free(threadpool_t *pool)
 }
 
 
-static void *__thread_fn(void *tpool)
+/*
+* function that is executed by each worker thread
+* thread waits to be woken up by a conditional-variable-signal
+* check if there is any work left
+* 	if no work in the queue, then it is shutdown time
+*	else, pick up a task and process it
+*/
+
+static void *thread_fn(void *tpool)
 {
 	threadpool_t *pool = (threadpool_t *)tpool;
 	

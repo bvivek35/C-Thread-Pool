@@ -37,9 +37,9 @@ typedef struct __queue_node __queue_node_t;
 /*
 * queue_t is the opaque type that encapsulates the queue ADT
 *
-* All entries to the queue occur at the tail end
-* All deletions occur at the head end
-* Also, keep a note on the number of entries in the queue
+* all entries to the queue occur at the tail end
+* all deletions occur at the head end
+* also, keep a note on the number of entries in the queue
 *
 * @var __head : ptr to the head of the queue where items exit
 * @var __tail : ptr to the tail of the queue where items are enqueued
@@ -116,13 +116,19 @@ int is_queue_empty(const queue_t *);
 
 
 /*
-* Destroy the queue and free all its contents
-* Acts a a destructor for queue_t ADT
+* destroy the queue and free all its contents
+* acts a a destructor for queue_t ADT
 *
 * @param queue_t* : queue which needs to be removed
 */
 
 void destroy_queue(queue_t *);
+
+/*
+* empties the queue by dumping all current contents
+* 
+* @param queue_t* : queue which needs to be emptied
+*/
 
 void empty_queue(queue_t *);
 

@@ -1,7 +1,7 @@
 /*
 * Interface to the task_t ADT
-* task_t can store a function and an arg that it can accept
-* this information can be used to call the function
+* Task_t can store a function and an arg that it can accept
+* This information can be used to call the function
 *
 * SEE src/task.c for the implementation
 *
@@ -19,7 +19,8 @@
 *
 * @var func : a ptr to the function that needs to be stored
 * @var arg : argument that needs to be passed to the function at it's call
-* If you ned to pass multiple arguments, then pass a structure.
+*
+* if you ned to pass multiple arguments, then pass a structure.
 */
 
 struct __task

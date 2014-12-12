@@ -1,7 +1,9 @@
 /*
 * File contains implementation of the task_t ADT
 * Stores a fn and a var to be passed to it
-* This info can later be used to invoke a call to that fn as was intended.
+* This info can later be used to invoke a call to that fn as was intended
+*
+* Implements the include/task.h interface
 */
 
 #include <stdio.h>
@@ -12,7 +14,6 @@
 
 /*
 * Creates a task from the given function ptr and arg.
-* SEE include/task.h
 */
 
 task_t *mk_task(void *(*func)(void *), void *arg)
@@ -44,7 +45,6 @@ task_t *mk_task(void *(*func)(void *), void *arg)
 * 		returning ptr to a fn taking 
 *			void* as arg 
 *			returning void*
-* SEE include/task.h
 */
 
 void *(*get_func(const task_t *task))(void *)
@@ -61,7 +61,6 @@ void *(*get_func(const task_t *task))(void *)
 
 /*
 * Getter function for the arg held in task
-* SEE include/task.h
 */
 
 void *get_arg(const task_t *task)
@@ -78,7 +77,6 @@ void *get_arg(const task_t *task)
 
 /*
 * frees memory used by the task structure
-* SEE include/task.h`
 */
 
 void destroy_task(task_t *task)
@@ -93,7 +91,6 @@ void destroy_task(task_t *task)
 
 /*
 * Executes the function in the task with its assoc arg
-* SEE include/task.h
 */
 
 void *run_task(const task_t *task)

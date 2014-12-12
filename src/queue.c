@@ -1,6 +1,8 @@
 /*
 * Implememtation of a FIFO data structure
 * Each item of the queue contains a task(well a ptr to it)
+* 
+* Implementation of the include/queue.h interface
 */	
 
 #include <stdio.h>
@@ -10,16 +12,15 @@
 #include "task.h"
 
 /*
-* Free a node of the queue.
-* Note this does not free the task assoc with that node.
-* You will need to call destroy_task(SEE include/task.h) explicitly 
+* free a node of the queue.
+* note this does not free the task assoc with that node.
+* you will need to call destroy_task(SEE include/task.h) explicitly 
 */
 static void destroy_queue_node(__queue_node_t *);
 
 
 /*
-* A function that returns a new queue.
-* SEE include/queue.h 
+* a function that returns a new queue.
 */
 
 queue_t *mk_queue()
@@ -39,11 +40,11 @@ queue_t *mk_queue()
 	return tmp;
 }
 
+
 /*
-* Add a task to the queue
-* Insert from tail end
-* Delete from head end
-* SEE include/queue.h
+* add a task to the queue
+* insert from tail end
+* delete from head end
 */
 
 void enqueue(queue_t *queue, task_t *task)
@@ -71,9 +72,9 @@ void enqueue(queue_t *queue, task_t *task)
 	queue->__n += 1;
 }
 
+
 /*
-* Remove a task from the queue
-* SEE include/queue.h	
+* remove a task from the queue
 */
 
 task_t *dequeue(queue_t *queue)
@@ -105,9 +106,9 @@ task_t *dequeue(queue_t *queue)
 	return ret_task;
 }
 
+
 /*
-* Get the current no. of items in the queue
-* SEE include/queue.h	
+* get the current no. of items in the queue
 */
 
 int get_len(const queue_t *queue)
@@ -115,12 +116,12 @@ int get_len(const queue_t *queue)
 	return queue->__n;
 }
 
+
 /*
-* Chcek if the queue is empty.
-* Boolean function.
+* chcek if the queue is empty.
+* boolean function.
 * 1 -> empty
 * 0 -> non empty
-* SEE include/queue.h 	
 */
 
 int is_queue_empty(const queue_t *queue)
@@ -128,10 +129,10 @@ int is_queue_empty(const queue_t *queue)
 	return queue->__n == 0;
 }
 
+
 /*
-* Destroy the queue.
-* Frees all nodes ALONG WITH ASSOC TASK
-* SEE include/queue.h
+* destroy the queue.
+* frees all nodes ALONG WITH ASSOC TASK
 */
 
 void destroy_queue(queue_t *queue)
@@ -142,6 +143,12 @@ void destroy_queue(queue_t *queue)
 	empty_queue(queue);
 	free(queue);
 }
+
+
+/*
+* empties the queue
+* effectively, makes it a new fresh queue
+*/
 
 void empty_queue(queue_t *queue)
 {
@@ -164,8 +171,9 @@ void empty_queue(queue_t *queue)
 }
 
 /*
-* Just free the node WITHOUT THE ASSOC TASK
+* just free the node WITHOUT THE ASSOC TASK
 */
+
 static void destroy_queue_node(__queue_node_t *tmp)
 {
 	free(tmp);
