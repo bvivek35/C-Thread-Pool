@@ -20,6 +20,23 @@
 #include "task.h"
 #include "queue.h"
 
+
+/*
+* Specify the possible states of the pool
+* working : pool has started, threads are processing
+* graceful_shutdown : disallow addition of tasks, complete the current queue of *		      tasks
+* immediate_shutdown : same as graceful_shutdown but doesnot wait for the queue *		       to be emptied 	
+*/
+
+enum __shutdown
+{
+	working,
+	graceful_shutdown,
+	immediate_shutdown,
+};
+typedef enum __shutdown shutdown_t;
+
+
 /*
 * ADT to store the entire thread-pool
 * @var __threads : ptr to array of worker threads that form the pool   
@@ -49,21 +66,6 @@ struct __threadpool
 };
 typedef struct __threadpool threadpool_t;
 
-
-/*
-* Specify the possible states of the pool
-* working : pool has started, threads are processing
-* graceful_shutdown : disallow addition of tasks, complete the current queue of *		      tasks
-* immediate_shutdown : same as graceful_shutdown but doesnot wait for the queue *		       to be emptied 	
-*/
-
-enum __shutdown
-{
-	working,
-	graceful_shutdown,
-	immediate_shutdown,
-};
-typedef enum __shutdown shutdown_t;
 
 
 /*
