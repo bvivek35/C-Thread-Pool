@@ -21,13 +21,18 @@ To Use :
 
 2) compile the library(static lib now)
         use :
-                make lib
+                make lib/libthreadpool.a
 
 4) compile your sources.
         use -I option to include the path for threadpool.h, queue.h, task.h  
 
         use the libthreadpool.a while linking(-lthreadpool)
         use -L option to specify the directory where libthreadpool.a is present
+
+-----------------------------------------------------------------------------------------------------------------------
+To Generate Test Cases :
+	use :
+		make all_bin
 
 -----------------------------------------------------------------------------------------------------------------------
 
