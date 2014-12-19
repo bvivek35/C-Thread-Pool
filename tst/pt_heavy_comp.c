@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <pthread.h>
 
-#include "task.h"
-#include "threadpool.h"
-
 int count;
 pthread_mutex_t lock;
 pthread_t t[1];
@@ -38,7 +35,7 @@ int main()
 	for (i = 0; i < 100000; ++i)
 	{
 		pthread_create(&t[0], NULL, f, NULL);
-		pthread_join(&t[0], NULL);
+		pthread_join(t[0], NULL);
 	}	
 	
 	pthread_mutex_destroy(&lock);

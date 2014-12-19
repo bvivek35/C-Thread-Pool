@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <unistd.h>
-
 
 #include "task.h"
 #include "threadpool.h"
@@ -14,7 +12,7 @@ pthread_mutex_t lock2;
 
 void *f1(void *a)
 {
-	printf("f1()\n");
+	printf("In function f1()\n");
 	pthread_mutex_lock(&lock1);
 	++my_count1;
 	pthread_mutex_unlock(&lock1);
@@ -22,7 +20,7 @@ void *f1(void *a)
 }
 void *f2(void *a)
 {
-	printf("f2()\n");
+	printf("In function f2()\n");
 	pthread_mutex_lock(&lock2);
 	++my_count2;
 	pthread_mutex_unlock(&lock2);
@@ -45,7 +43,7 @@ int main()
 	threadpool_destroy(pool, graceful_shutdown);	
 	threadpool_add_task(pool, mk_task(f2, NULL));
 	
-	printf("%d\n", my_count1);
-	printf("%d\n", my_count2);
+	printf("my_count1 : %d\n", my_count1);
+	printf("my_count2 : %d\n", my_count2);
 }
 
