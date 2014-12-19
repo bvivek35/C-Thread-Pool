@@ -1,3 +1,30 @@
+all_bin : bin/imm_shutdown bin/graceful_shutdown bin/heavy_comp bin/pt_heavy_comp
+	echo "preparing test cases"	
+
+bin/imm_shutdown : obj/imm_shutdown.o lib/libthreadpool.a
+	gcc obj/imm_shutdown.o -L lib -lthreadpool -lpthread -o bin/imm_shutdown
+
+obj/imm_shutdown.o : tst/imm_shutdown.c
+	gcc -c tst/imm_shutdown.c -Iinclude -o obj/imm_shutdown.o
+
+bin/graceful_shutdown : obj/graceful_shutdown.o lib/libthreadpool.a
+	gcc obj/graceful_shutdown.o -L lib -lthreadpool -lpthread -o bin/graceful_shutdown
+
+obj/graceful_shutdown.o : tst/graceful_shutdown.c
+	gcc -c tst/graceful_shutdown.c -Iinclude -o obj/graceful_shutdown.o
+
+bin/heavy_comp : obj/heavy_comp.o lib/libthreadpool.a
+	gcc obj/heavy_comp.o -L lib -lthreadpool -lpthread -o bin/heavy_comp
+
+obj/heavy_comp.o : tst/heavy_comp.c
+	gcc -c tst/heavy_comp.c -Iinclude -o obj/heavy_comp.o
+
+bin/pt_heavy_comp : obj/pt_heavy_comp.o lib/libthreadpool.a
+	gcc obj/pt_heavy_comp.o -L lib -lthreadpool -lpthread -o bin/pt_heavy_comp
+
+obj/pt_heavy_comp.o : tst/pt_heavy_comp.c
+	gcc -c tst/pt_heavy_comp.c -Iinclude -o obj/pt_heavy_comp.o
+
 lib/libthreadpool.a : obj/threadpool.o obj/queue.o obj/task.o
 	ar rcs lib/libthreadpool.a obj/threadpool.o obj/queue.o obj/task.o
 
@@ -9,12 +36,6 @@ obj/queue.o : src/queue.c
 
 obj/task.o : src/task.c
 	gcc -c src/task.c -Iinclude -o obj/task.o
-
-obj/test_pool_2.o : tst/test_pool_2.c
-	gcc -c tst/test_pool_2.c -Iinclude -o obj/test_pool_2.o
-
-bin/t2 : obj/test_pool_2.o lib/libthreadpool.a
-	gcc obj/test_pool_2.o -L lib -lthreadpool -lpthread -o bin/t2
 
 clean : 
 	rm -rf lib/* obj/* */a.out a.out
