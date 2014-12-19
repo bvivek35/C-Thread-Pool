@@ -179,9 +179,9 @@ static void *thread_fn(void *tpool)
 		pool->__n_started_threads += 1;
  		pool->__n_task_pending -= 1;
 		
+		printf("\n Thread no %d is executing\n ",pool->__n_started_threads);
 		pthread_mutex_unlock(&(pool->__pool_lock));	
-		
-		printf("running\n");
+		//printf("running\n");
 		run_task(task);
 		
 		pthread_mutex_lock(&(pool->__pool_lock));
