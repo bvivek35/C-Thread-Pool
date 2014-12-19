@@ -34,6 +34,15 @@ To Generate Test Cases :
 	use :
 		make all_bin
 
+	run :
+		bin/<insert test case name>
+		
+		Currently there is a lot of output that comes out of the test cases for debugging purposes. you might want to redirect them to a local file
+		
+		bin/<insert test case name> >out
+		
+		Eg. $ bin/heavy_comp > out
+
 -----------------------------------------------------------------------------------------------------------------------
 
 Note On gcc Compiler Options....

@@ -1,9 +1,14 @@
 bin/*
 a.out
+*/a.out
+
 *.o
+*/*.o
 *.a
+
 obj/*
 lib/*
-*/a.out
-*/*.o
+
 .*.swp
+
+out

@@ -1,4 +1,5 @@
-1) Make docs compatible with doxygen
-2) Add error codes in all pthread fns.
-3) Add error codes for threadpool fns.
-4) Some adv features 
+1) Make all print stmts appear in a log using a logging library
+2) Make docs compatible with doxygen
+3) Add error codes in all pthread fns.
+4) Add error codes for threadpool fns.
+5) Some adv features 
