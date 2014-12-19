@@ -21,7 +21,7 @@ To Use :
 
 2) compile the library(static lib now)
         use :
-                make lib/libthreadpool.a
+                make lib
 
 4) compile your sources.
         use -I option to include the path for threadpool.h, queue.h, task.h  

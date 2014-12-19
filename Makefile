@@ -1,3 +1,5 @@
+lib : lib/libthreadpool.a 
+
 all_bin : bin/imm_shutdown bin/graceful_shutdown bin/heavy_comp bin/pt_heavy_comp
 
 bin/imm_shutdown : obj/imm_shutdown.o lib/libthreadpool.a
