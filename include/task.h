@@ -40,17 +40,17 @@ typedef struct __task task_t;
 * creates a new task_t given the function and its arg.
 * acts as a constructor
 *
-* @param void *(*)(void *) : ptr to the function
-* @param void * : the arg
+* @param func : ptr to the function
+* @param args : the arg
 */
 
-task_t *mk_task(void *(*)(void *), void *);
+task_t *mk_task(void *(*func)(void *), void *args);
 
 
 /*
 * getter function for the function stored in task_t
 *
-* @param const task_t* : the task whose fn needs to be extracted
+* @param task : the task whose fn needs to be extracted
 *
 * @return void *(*)(void *) : the fn ptr itself
 *
@@ -66,13 +66,13 @@ task_t *mk_task(void *(*)(void *), void *);
 *                       returning void*
 */
 
-void *(*get_func(const task_t *))(void *);
+void *(*get_func(const task_t *task))(void *);
 
 
 /*
 * getter function for the arg stored in the task_t ADT
 *
-* @param task_t* : the task_t whose arg needs to be extracted
+* @param task : the task_t whose arg needs to be extracted
 * 
 * @return void* : the arg itself
 */
@@ -84,7 +84,7 @@ void *get_arg(const task_t *);
 * free the task_t
 * acts as a destructor
 *
-* @param task_t* : the task_t that needs to be freed
+* @param task : the task_t that needs to be freed
 */
 
 void destroy_task(task_t *);
@@ -93,7 +93,7 @@ void destroy_task(task_t *);
 /*
 * execute the function contained in the task_t along with assoc arg
 *
-* @param task_t* : the task_t which contains fn and arg
+* @param task : the task_t which contains fn and arg
 *
 * @return void* : the return value that the function returns is passed back
 */

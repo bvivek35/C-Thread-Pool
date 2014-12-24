@@ -87,20 +87,20 @@ threadpool_t *threadpool_create(int);
 /*
 * add a new task to the task-queue
 * 
-* @param threadpool_t* : pool to which task must be added to
-* @param task_t* : the task that will be added
+* @param pool : pool to which task must be added to
+* @param task : the task that will be added
 */
 
-void threadpool_add_task(threadpool_t *, task_t *);
+void threadpool_add_task(threadpool_t *pool, task_t *task);
 
 
 /*
 * shut the pool down
 * 
-* @param threadpool_t* : pool to shutdown
+* @param pool : pool to shutdown
 * @param status : type of shutdown to be done 
 */
 
-void threadpool_destroy(threadpool_t *, shutdown_t);
+void threadpool_destroy(threadpool_t *pool, shutdown_t status);
 
 #endif

@@ -74,62 +74,62 @@ queue_t *mk_queue();
 /*
 * add a new task to the queue
 *
-* @param queue_t* : the queue to which the new task needs to be added to
-* @param task_t* : the task that needs to be added
+* @param queue : the queue to which the new task needs to be added to
+* @param task : the task that needs to be added
 */
 
-void enqueue(queue_t *, task_t *);
+void enqueue(queue_t *queue, task_t *task);
 
 
 /*
 * remove or consume an item i.e. task
 * 
-* @param queue_t * : queue from which an item needs to be removed
+* @param queue : queue from which an item needs to be removed
 * 
 * @return task_t* : ptr to the task which was just removed 
 */
 
-task_t *dequeue(queue_t *);
+task_t *dequeue(queue_t *queue);
 
 
 /*
 * get the number of items currently in the queue
 *
-* @param queue_t* : queue whose current length need to be determined
+* @param queue : queue whose current length need to be determined
 *
 * @return int : the length of the queue	
 */
 
-int get_len(const queue_t *);
+int get_len(const queue_t *queue);
 
 
 /*
 * check if the queue is empty. A boolean function
 * 
-* @param queue_t* : queue to be considered
+* @param queue : queue to be considered
 *
 * @return int : 0 if queue is empty
 *		1 if not empty
 */
 
-int is_queue_empty(const queue_t *);
+int is_queue_empty(const queue_t *queue);
 
 
 /*
 * destroy the queue and free all its contents
 * acts a a destructor for queue_t ADT
 *
-* @param queue_t* : queue which needs to be removed
+* @param queue : queue which needs to be removed
 */
 
-void destroy_queue(queue_t *);
+void destroy_queue(queue_t *queue);
 
 /*
 * empties the queue by dumping all current contents
 * 
-* @param queue_t* : queue which needs to be emptied
+* @param queue : queue which needs to be emptied
 */
 
-void empty_queue(queue_t *);
+void empty_queue(queue_t *queue);
 
 #endif
