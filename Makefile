@@ -39,7 +39,7 @@ obj/task.o : src/task.c
 	gcc -c src/task.c -Iinclude -o obj/task.o
 
 clean : 
-	rm -rf lib/* obj/* */a.out a.out
+	rm -rf lib/* obj/* bin/* */a.out a.out
 
 
 
