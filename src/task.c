@@ -20,8 +20,8 @@ task_t *mk_task(void *(*func)(void *), void *arg)
 {
 #if 0
 	printf("mktask()\n");
-	
-	return NULL;
+
+	return NULL;	
 #endif
 	
 	task_t *tmp = malloc(sizeof *tmp);
