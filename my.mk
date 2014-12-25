@@ -1,7 +1,7 @@
 CC := gcc
 
-SRCDIR := src
-OBJDIR := obj
+LIB_SRCDIR := src
+LIB_OBJDIR := obj
 LIBDIR := lib
 BINDIR := bin
 
@@ -17,7 +17,7 @@ LIB := libthreadpool.a
 lib : $(LIB_OBJS)
 	ar rcs $(LIBDIR)/$(LIB) $^
  
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
+$(LIB_OBJDIR)/%.o : $(LIB_SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(INCL) -c $< -o $@  
 
 clean : 
