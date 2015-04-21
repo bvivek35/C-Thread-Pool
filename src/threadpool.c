@@ -81,12 +81,16 @@ void threadpool_add_task(threadpool_t *pool, task_t *task)
 	
 	if (pool->__shutdown == working)
 	{
+#ifdef DEBUG
 		printf("adding to q\n");
+#endif
 		pool->__n_task_pending += 1;
 		enqueue(pool->__task_queue, task);
 		pthread_cond_signal(&(pool->__pool_notify_task));
 	}
+#ifdef DEBUG
 	printf("len : %d\n", get_len(pool->__task_queue));
+#endif
 	pthread_mutex_unlock(&(pool->__pool_lock));
 }
 
@@ -103,12 +107,16 @@ void threadpool_destroy(threadpool_t *pool, shutdown_t status)
 	pthread_mutex_lock(&(pool->__pool_lock));
 	if (pool->__shutdown == working)
 	{	
+#ifdef DEBUG
 		printf("destroy\n");
+#endif
 		int i;
 		pool->__shutdown = status;
 		if (status == immediate_shutdown)
 		{
+#ifdef DEBUG
 			printf("Emptying q\n");
+#endif
 			empty_queue(pool->__task_queue);
 		}
 
@@ -117,7 +125,9 @@ void threadpool_destroy(threadpool_t *pool, shutdown_t status)
 
 		for (i = 0; i < pool->__n_threads; ++i)
 		{
+#ifdef DEBUG
 			printf("joining %d\n", i);
+#endif
 			pthread_join(pool->__threads[i], NULL);
 		}
 	}
@@ -163,25 +173,33 @@ static void *thread_fn(void *tpool)
 		while (is_queue_empty(pool->__task_queue) && 
 				pool->__shutdown == working)
 		{
+#ifdef DEBUG
 			printf("looping\n");
+#endif
 			pthread_cond_wait(&(pool->__pool_notify_task), 
 							&(pool->__pool_lock));
 		}
-		
+#ifdef DEBUG		
 		printf("waking\n");	
+#endif
 		if (is_queue_empty(pool->__task_queue))
 		{
+#ifdef DEBUG
 			printf("breaking : %d\n", get_len(pool->__task_queue));
+#endif
 			break;			 
 		}
 		
 		task = dequeue(pool->__task_queue);
 		pool->__n_started_threads += 1;
  		pool->__n_task_pending -= 1;
-		
+#ifdef DEBUG
 		printf("\n Thread no %d is executing\n ",pool->__n_started_threads);
+#endif
 		pthread_mutex_unlock(&(pool->__pool_lock));	
-		//printf("running\n");
+#ifdef DEBUG
+		printf("running\n");
+#endif
 		run_task(task);
 		
 		pthread_mutex_lock(&(pool->__pool_lock));

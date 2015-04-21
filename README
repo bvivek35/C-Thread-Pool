@@ -11,7 +11,7 @@ Making the library is straight forward. You can read the makefile.
 
 The code is well documented, I suggest you to start from the header files, then onto the implementations in src/
 
------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 To Use :
 
@@ -23,16 +23,19 @@ To Use :
         use :
                 make lib
 
+        If you need debugging information, use :
+                make lib DEFINES=-DDEBUG
+
 4) compile your sources.
         use -I option to include the path for threadpool.h, queue.h, task.h  
 
         use the libthreadpool.a while linking(-lthreadpool)
         use -L option to specify the directory where libthreadpool.a is present
 
------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 To Generate Test Cases :
 	use :
-		make all_bin
+		make tst
 
 	run :
 		bin/<insert test case name>
@@ -43,7 +46,7 @@ To Generate Test Cases :
 		
 		Eg. $ bin/heavy_comp > out
 
------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 Note On gcc Compiler Options....
 
@@ -64,4 +67,4 @@ Note On gcc Compiler Options....
 			Convention used is l(ib)example(.a)
 				The stuff in b/w parenthesis is assumed and hence ignored.
 
------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

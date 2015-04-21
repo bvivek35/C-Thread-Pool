@@ -15,7 +15,7 @@ void *f(void *args)
 
 	j = 0;
 
-	for (i = 0; i < 100000; ++i)
+	for (i = 0; i < 1000000; ++i)
 		if (i % 2)
 			++j;
 		else
@@ -36,11 +36,12 @@ int main(int argc, char **argv)
 	
 	int n_threads;
 	n_threads = atoi(argv[1]);
+//	n_threads = 8;	
 	
 	threadpool_t *pool = threadpool_create(n_threads);
 	
 	int i;
-	for (i = 0; i < 100000; ++i)
+	for (i = 0; i < 10000; ++i)
 		threadpool_add_task(pool, mk_task(f, NULL));
 	
 	threadpool_destroy(pool, graceful_shutdown);

@@ -6,8 +6,8 @@ LIBDIR := lib
 BINDIR := bin
 
 INCL := -Iinclude/
-CFLAGS := -g
-
+CFLAGS :=
+DEFINES:=
 LIB_SRCS := $(wildcard src/*.c)
 LIB_OBJS := $(subst src, obj, $(LIB_SRCS))
 LIB_OBJS := $(patsubst %.c, %.o, $(LIB_OBJS))
@@ -18,7 +18,7 @@ lib : $(LIB_OBJS)
 	ar rcs $(LIBDIR)/$(LIB) $^
  
 $(LIB_OBJDIR)/%.o : $(LIB_SRCDIR)/%.c
-	$(CC) $(CFLAGS) $(INCL) -c $< -o $@  
+	$(CC) $(CFLAGS) $(DEFINES) $(INCL) -c $< -o $@  
 
 clean : 
 	rm -rf bin/* obj/* lib/* a.out *.o
